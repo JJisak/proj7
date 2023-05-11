@@ -37,4 +37,47 @@ public class CustomArrayListTest {
         assertEquals("one", list.get(0));
         assertEquals("three", list.get(1));
     }
+
+
+
+
+    @Test
+    public void testAddAtIndex() {
+        CustomArrayList<String> list = new CustomArrayList<>();
+        list.add("one");
+        list.add("two");
+        list.add("three");
+        list.add(1, "four");
+        assertEquals("one", list.get(0));
+        assertEquals("four", list.get(1));
+        assertEquals("two", list.get(2));
+        assertEquals("three", list.get(3));
+    }
+
+    @Test
+    public void testRemoveOutOfBounds() {
+        CustomArrayList<String> list = new CustomArrayList<>();
+        list.add("one");
+        list.add("two");
+        try {
+            list.remove(2);
+            fail("Expected IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException e) {
+            // expected
+        }
+    }
+
+
+    @Test
+    public void testAddIndex() {
+        CustomArrayList<Integer> list = new CustomArrayList<>();
+        list.add(1);
+        //Positive test case
+        assertTrue(list.add(0, 2));
+        //Negative test case
+        assertThrows(IndexOutOfBoundsException.class, () -> list.add(-1, 3));
+    }
+
+
+
 }
